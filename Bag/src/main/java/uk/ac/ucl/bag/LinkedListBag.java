@@ -199,7 +199,6 @@ public class LinkedListBag<T extends Comparable> extends AbstractBag<T>{
     return size() == 0;
   }
   
-  
   @Override 
   public int size() {
     int count = 0;
