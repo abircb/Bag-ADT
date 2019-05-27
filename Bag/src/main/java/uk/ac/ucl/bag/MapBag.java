@@ -9,9 +9,9 @@ import java.util.HashMap;
 This class implements Bags using a HashMap as the internal data structure.
 */
 
-public class MapBag<V extends Comparable> extends AbstractBag<V>{
+public class MapBag<V extends Comparable> extends AbstractBag<V> {
   
-  private static class Element<Value extends Comparable>{
+  private static class Element<Value extends Comparable> {
     
     public int count;
     public Value value;
@@ -38,7 +38,7 @@ public class MapBag<V extends Comparable> extends AbstractBag<V>{
     this(MAX_SIZE);
   }
   
-  public MapBag(int maxSize) throws BagException{
+  public MapBag(int maxSize) throws BagException {
     if (maxSize > MAX_SIZE) {
       throw new BagException("Attempting to create a bag with size greater than maximum");
     }
@@ -57,7 +57,7 @@ public class MapBag<V extends Comparable> extends AbstractBag<V>{
   
   }
   @Override
-  public void add(V value) throws BagException{
+  public void add(V value) throws BagException {
     
     if(value == null) {
       System.out.println("Attempting to add a null value to the bag");
@@ -145,29 +145,25 @@ public class MapBag<V extends Comparable> extends AbstractBag<V>{
   
   @Override
   public boolean isEmpty() {
-      return size() == 0;
+    return size() == 0;
   }
   
   @Override
   public int size() {
-      return contents.size();
-  
+    return contents.size();
   }
   
-  private class MapBagUniqueIterator implements Iterator<V>
-    {
-      private int key = 0;
+  private class MapBagUniqueIterator implements Iterator<V> {
+    private int key = 0;
 
     @Override
-      public boolean hasNext()
-      {
+    public boolean hasNext() {
         if (key < contents.size()) return true;
         return false;
-      }
+    }
       
     @Override
-      public V next()
-      {
+      public V next() {
         return contents.get(key++).value;
       }
     }
@@ -178,39 +174,36 @@ public class MapBag<V extends Comparable> extends AbstractBag<V>{
    * any copies (i.e., one value for each element in the HashMap ). 
    */
     @Override
-    public Iterator<V> iterator()
-    {
+    public Iterator<V> iterator() {
       return new MapBagUniqueIterator();
     }
   
-  private class MapBagIterator implements Iterator <V>{
+  private class MapBagIterator implements Iterator <V> {
     
     private int key =   0;
     private int count = 0;
     
     @Override
-    public boolean hasNext()
-      {
-          if (key < contents.size()) {
-            if (count < contents.get(key).count) return true;
-            if ((count == contents.get(key).count) && ((key + 1) < contents.size())) return true;
-          }
-        return false;
+    public boolean hasNext() {
+      if (key < contents.size()) {
+        if (count < contents.get(key).count) return true;
+        if ((count == contents.get(key).count) && ((key + 1) < contents.size())) return true;
       }
+      return false;
+    }
     
     @Override 
     public V next() {
-        if (count < contents.get(key).count)
-        {
+      if (count < contents.get(key).count) {
           V value = contents.get(key).value;
           count++;
           return value;
-        }
-        count = 1;
-        key++;
-        return contents.get(key).value;
       }
-    
+      count = 1;
+      key++;
+      return contents.get(key).value;
+    }
+  
   }
   
   @Override
