@@ -35,7 +35,7 @@ public abstract class AbstractBag<T extends Comparable> implements Bag<T>
 			result += (value + ": " + this.countOf(value) + " occurence");
  			
 			if(this.countOf(value) != 1) result += "s";
-		}
+	    }
 		return result + "]";
 	}
 	
